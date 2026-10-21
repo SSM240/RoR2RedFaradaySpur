@@ -1,0 +1,10 @@
+﻿{
+	"name": "RedFaradaySpur",
+	"version_number": "1.0.0",
+	"website_url": "https://github.com/SSM240/RoR2RedFaradaySpur",
+	"description": "Turns Faraday Spur into a red (legendary) item, with adjusted stats. Includes LookingGlass and Quality support",
+	"dependencies": [
+		"bbepis-BepInExPack-5.4.2122",
+		"RiskofThunder-HookGenPatcher-1.2.9"
+	]
+}
