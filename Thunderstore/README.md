@@ -32,3 +32,5 @@ As always, if anything is broken, ping me on Discord (`ssm24`) or open an issue 
 ![blank-space-for-comedic-effect](https://raw.githubusercontent.com/SSM240/RoR2RedFaradaySpur/refs/heads/main/github-imgs/blank-space-for-comedic-effect.png)
 
 more like faREDay spur
+
+also i had literally no idea someone was working on a [mod that turns spur into a void item instead](https://thunderstore.io/c/riskofrain2/p/Lilybunvy/VoidConversions/) at literally the same time that's really funny timing lmao
