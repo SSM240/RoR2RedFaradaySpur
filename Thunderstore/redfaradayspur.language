@@ -1,0 +1,5 @@
+{
+  "en": {
+    "ITEM_JUMPDAMAGESTRIKE_DESC_FMT": "Moving around builds up <style=cIsUtility>charge</style>, granting up to <style=cIsUtility>+160% movement speed</style> and <style=cIsUtility>+200% jump height</style> at 100%. At 25% charge or higher, jumping triggers an <style=cIsDamage>explosive discharge</style> for <style=cIsDamage>{0}% <style=cStack>(+{1}% per stack)</style> damage</style> in a 17m-32m <style=cStack>(+7.5m per stack)</style> area.",
+  }
+}

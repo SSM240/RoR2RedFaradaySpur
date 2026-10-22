@@ -10,8 +10,8 @@ namespace RoR2RedFaradaySpur;
 
 internal static class ItemQualitiesInterop
 {
-    private static bool GetSpriteFromFile(string filename, out Sprite sprite) 
-        => RedFaradaySpurPlugin.GetSpriteFromFile(filename, out sprite);
+    private static bool GetSpriteFromFile(string folder, string filename, out Sprite sprite) 
+        => RedFaradaySpurPlugin.GetSpriteFromFile(folder, filename, out sprite);
 
     internal static void HandleQualityFaradaySpur()
     {
@@ -36,19 +36,19 @@ internal static class ItemQualitiesInterop
         ItemQualityGroup group = ItemQualitiesContent.ItemQualityGroups.JumpDamageStrike;
         // bluh
         #pragma warning disable CS0618 // Type or member is obsolete
-        if (GetSpriteFromFile("texJumpDamageStrikeUncommon_new.png", out var uncommonSprite))
+        if (GetSpriteFromFile("icons", "texJumpDamageStrikeUncommon_new.png", out var uncommonSprite))
         {
             group.GetItemDef(QualityTier.Uncommon).pickupIconSprite = uncommonSprite;
         }
-        if (GetSpriteFromFile("texJumpDamageStrikeRare_new.png", out var rareSprite))
+        if (GetSpriteFromFile("icons", "texJumpDamageStrikeRare_new.png", out var rareSprite))
         {
             group.GetItemDef(QualityTier.Rare).pickupIconSprite = rareSprite;
         }
-        if (GetSpriteFromFile("texJumpDamageStrikeEpic_new.png", out var epicSprite))
+        if (GetSpriteFromFile("icons", "texJumpDamageStrikeEpic_new.png", out var epicSprite))
         {
             group.GetItemDef(QualityTier.Epic).pickupIconSprite = epicSprite;
         }
-        if (GetSpriteFromFile("texJumpDamageStrikeLegendary_new.png", out var legendarySprite))
+        if (GetSpriteFromFile("icons", "texJumpDamageStrikeLegendary_new.png", out var legendarySprite))
         {
             group.GetItemDef(QualityTier.Legendary).pickupIconSprite = legendarySprite;
         }
