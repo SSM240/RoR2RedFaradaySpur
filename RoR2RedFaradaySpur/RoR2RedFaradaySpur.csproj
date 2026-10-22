@@ -29,6 +29,9 @@
 	    <HintPath>..\lib-stripped\ItemQualities-nstrip.dll</HintPath>
 	    <Private>False</Private>
 	  </Reference>
+	  <Reference Include="LookingGlass">
+	    <HintPath>..\lib-stripped\LookingGlass-nstrip.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

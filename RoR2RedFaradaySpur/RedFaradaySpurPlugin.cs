@@ -17,7 +17,9 @@ namespace RoR2RedFaradaySpur;
 
 [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
 [BepInDependency("com.rune580.riskofoptions")]
+[BepInDependency("com.bepis.r2api.language")]
 [BepInDependency("com.Gorakh.ItemQualities", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("droppod.lookingglass", BepInDependency.DependencyFlags.SoftDependency)]
 public class RedFaradaySpurPlugin : BaseUnityPlugin
 {
     public const string PluginGUID = PluginAuthor + "." + PluginName;
@@ -27,6 +29,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
 
     internal static RedFaradaySpurPlugin Instance;
     internal bool ItemQualitiesLoaded = false;
+    internal bool LookingGlassLoaded = false;
 
     public static ConfigEntry<bool> AdjustChargeSpeed;
     public static ConfigEntry<float> ChargeSpeedMult;
@@ -40,6 +43,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         Log.Init(Logger);
 
         ItemQualitiesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Gorakh.ItemQualities");
+        LookingGlassLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("droppod.lookingglass");
 
         AdjustChargeSpeed = Config.Bind("Stats", "Adjust Charge Speed", true,
             "Whether to change the speed at which Faraday Spur charges");
@@ -90,17 +94,36 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         On.RoR2.ItemCatalog.SetItemDefs += On_ItemCatalog_SetItemDefs;
         IL.RoR2.Items.JumpDamageStrikeBodyBehavior.UpdateCharge += IL_JumpDamageStrikeBodyBehavior_UpdateCharge;
         IL.RoR2.Items.JumpDamageStrikeBodyBehavior.DischargeEffects += IL_JumpDamageStrikeBodyBehavior_DischargeEffects;
+
+        if (LookingGlassLoaded)
+        {
+            ItemCatalog.availability.CallWhenAvailable(LookingGlassInterop.UpdateStats);
+        }
     }
 
+    private static readonly string[] qualityTokens = ["", "_UNCOMMON", "_RARE", "_EPIC", "_LEGENDARY"];
     private void UpdateDesc(object sender, EventArgs e) => UpdateDesc();
     private void UpdateDesc()
     {
         int baseDamage = (int) (AdjustDamage.Value ? BaseDamage.Value * 100f : 400f);
         int stackDamage = (int) (AdjustDamage.Value ? StackDamage.Value * 100f : 280f);
 
-        string formattedStr = Language.GetStringFormatted("ITEM_JUMPDAMAGESTRIKE_DESC_FMT", baseDamage, stackDamage);
+        foreach (string quality in qualityTokens)
+        {
+            string baseToken = $"ITEM_JUMPDAMAGESTRIKE{quality}_DESC";
+            string fmtToken = $"ITEM_JUMPDAMAGESTRIKE{quality}_DESC_FMT";
 
-        Language.currentLanguage.SetStringByToken("ITEM_JUMPDAMAGESTRIKE_DESC", formattedStr);
+            string formattedStr = Language.GetStringFormatted(fmtToken, baseDamage, stackDamage);
+            if (formattedStr != fmtToken) // make sure the formatted string actually exists before we clobber the base version
+            {
+                Language.currentLanguage.SetStringByToken(baseToken, formattedStr);
+            }
+        }
+
+        if (LookingGlassLoaded && ItemCatalog.availability.available)
+        {
+            LookingGlassInterop.UpdateStats();
+        }
     }
 
     // shoutouts to https://github.com/prodzpod/WhiteGuillotine/blob/main/WhiteGuillotine/Main.cs
