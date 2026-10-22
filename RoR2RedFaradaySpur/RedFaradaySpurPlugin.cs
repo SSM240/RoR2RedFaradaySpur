@@ -68,7 +68,9 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         StepSliderConfig chargeSpeedMultConfig = new()
         {
             min = 0f, max = 5f, increment = 0.05f, FormatString = "{0:P0}",
-            checkIfDisabled = () => !AdjustChargeSpeed.Value
+            checkIfDisabled = () => !AdjustChargeSpeed.Value,
+            remapManualInputToStep = false,
+            TryParseDelegate = ParsePercentage
         };
         ModSettingsManager.AddOption(new StepSliderOption(ChargeSpeedMult, chargeSpeedMultConfig));
         ModSettingsManager.AddOption(new CheckBoxOption(AdjustDamage));
@@ -76,14 +78,18 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         {
             min = 0f, max = 40f, increment = 0.2f, FormatString = "{0:P0}",
             description = "The damage the explosion should do on the first stack.\n\nVanilla default is 400%, mod default is 1000%",
-            checkIfDisabled = () => !AdjustDamage.Value
+            checkIfDisabled = () => !AdjustDamage.Value,
+            remapManualInputToStep = false,
+            TryParseDelegate = ParsePercentage
         };
         ModSettingsManager.AddOption(new StepSliderOption(BaseDamage, baseDamageConfig));
         StepSliderConfig stackDamageConfig = new()
         {
             min = 0f, max = 40f, increment = 0.2f, FormatString = "{0:P0}",
             description = "The damage the explosion should do for every stack beyond the first.\n\nVanilla default is 280%, mod default is 700%",
-            checkIfDisabled = () => !AdjustDamage.Value
+            checkIfDisabled = () => !AdjustDamage.Value,
+            remapManualInputToStep = false,
+            TryParseDelegate = ParsePercentage
         };
         ModSettingsManager.AddOption(new StepSliderOption(StackDamage, stackDamageConfig));
 
@@ -120,11 +126,16 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
                 Language.currentLanguage.SetStringByToken(baseToken, formattedStr);
             }
         }
+    }
 
-        if (LookingGlassLoaded && ItemCatalog.availability.available)
+    private bool ParsePercentage(string input, CultureInfo cultureInfo, out float value)
+    {
+        bool result = float.TryParse(input, out value);
+        if (result)
         {
-            LookingGlassInterop.UpdateStats();
+            value /= 100f;
         }
+        return result;
     }
 
     // shoutouts to https://github.com/prodzpod/WhiteGuillotine/blob/main/WhiteGuillotine/Main.cs

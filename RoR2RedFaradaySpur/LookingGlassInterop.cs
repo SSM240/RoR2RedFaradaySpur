@@ -13,10 +13,10 @@ internal static class LookingGlassInterop
     {
         // change the LookingGlass stats display to use the new values
         ItemStatsDef spurStats = ItemDefinitions.allItemDefinitions[(int)DLC3Content.Items.JumpDamageStrike.itemIndex];
-        float baseDamage = RedFaradaySpurPlugin.AdjustDamage.Value ? RedFaradaySpurPlugin.BaseDamage.Value : 4f;
-        float stackDamage = RedFaradaySpurPlugin.AdjustDamage.Value ? RedFaradaySpurPlugin.StackDamage.Value : 2.8f;
         spurStats.calculateValuesFlat = (stackCount) =>
         {
+            float baseDamage = RedFaradaySpurPlugin.AdjustDamage.Value ? RedFaradaySpurPlugin.BaseDamage.Value : 4f;
+            float stackDamage = RedFaradaySpurPlugin.AdjustDamage.Value ? RedFaradaySpurPlugin.StackDamage.Value : 2.8f;
             List<float> values = new();
             values.Add(baseDamage + stackDamage * (stackCount - 1));
             values.Add(24.8f + stackCount * 7.5f);
