@@ -1,15 +1,9 @@
 ﻿using BepInEx.Logging;
 using ItemQualities;
-using ItemQualities.ContentManagement;
-using MonoMod.RuntimeDetour;
-using MonoMod.Utils;
 using RoR2;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
 using UnityEngine;
 
 namespace RoR2RedFaradaySpur;

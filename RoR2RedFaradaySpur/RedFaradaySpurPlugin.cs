@@ -4,8 +4,6 @@ using R2API;
 using RoR2;
 using System.IO;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.XR;
 
 namespace RoR2RedFaradaySpur;
 
