@@ -8,6 +8,7 @@ using RiskOfOptions.OptionConfigs;
 using RoR2;
 using RoR2.Items;
 using System.IO;
+using Path = System.IO.Path; // RoR2.Path is also a thing
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using System.Globalization;
@@ -48,7 +49,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         AdjustChargeSpeed = Config.Bind("Stats", "Adjust Charge Speed", true,
             "Whether to change the speed at which Faraday Spur charges");
         ChargeSpeedMult = Config.Bind("Stats", "Charge Speed Multiplier", 2f,
-            "The amount to multiply the Faraday Spur charge speed by");
+            "The rate at which Faraday Spur should charge");
         AdjustDamage = Config.Bind("Stats", "Adjust Explosion Damage", true,
             "Whether to adjust the explosion damage of Faraday Spur");
         BaseDamage = Config.Bind("Stats", "Base Explosion Damage", 10f,
@@ -73,14 +74,14 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         ModSettingsManager.AddOption(new CheckBoxOption(AdjustDamage));
         StepSliderConfig baseDamageConfig = new()
         {
-            min = 0f, max = 20f, increment = 0.1f, FormatString = "{0:P0}",
+            min = 0f, max = 40f, increment = 0.2f, FormatString = "{0:P0}",
             description = "The damage the explosion should do on the first stack.\n\nVanilla default is 400%, mod default is 1000%",
             checkIfDisabled = () => !AdjustDamage.Value
         };
         ModSettingsManager.AddOption(new StepSliderOption(BaseDamage, baseDamageConfig));
         StepSliderConfig stackDamageConfig = new()
         {
-            min = 0f, max = 20f, increment = 0.1f, FormatString = "{0:P0}",
+            min = 0f, max = 40f, increment = 0.2f, FormatString = "{0:P0}",
             description = "The damage the explosion should do for every stack beyond the first.\n\nVanilla default is 280%, mod default is 700%",
             checkIfDisabled = () => !AdjustDamage.Value
         };
@@ -215,7 +216,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         // largely taken from https://github.com/Vl4dimyr/CaptainShotgunModes/blob/fdf828e/RiskOfOptionsMod.cs#L36-L48
         try
         {
-            using Stream stream = File.OpenRead(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Instance.Info.Location), folder, filename));
+            using Stream stream = File.OpenRead(Path.Combine(Path.GetDirectoryName(Instance.Info.Location), folder, filename));
             Texture2D texture = new Texture2D(0, 0);
             byte[] imgData = new byte[stream.Length];
 
@@ -230,7 +231,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         }
         catch (FileNotFoundException)
         {
-            Log.Error($"file {System.IO.Path.Combine(folder, filename)} not found");
+            Log.Error($"file {Path.Combine(folder, filename)} not found");
             return false;
         }
     }
