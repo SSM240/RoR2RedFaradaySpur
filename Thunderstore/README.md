@@ -21,7 +21,7 @@ The mod has full support for [Quality](https://thunderstore.io/c/riskofrain2/p/G
 
 The new damage stats will also be reflected in the stats display for [LookingGlass](https://thunderstore.io/c/riskofrain2/p/DropPod/LookingGlass/) if that is installed.
 
-Everyone (server + client) should have this mod in multiplayer.
+Everyone (server + client) should have this mod in multiplayer, with the same config.
 
 As always, if anything is broken, ping me on Discord (`ssm24`) or open an issue on GitHub. Otherwise, enjoy :D
 
