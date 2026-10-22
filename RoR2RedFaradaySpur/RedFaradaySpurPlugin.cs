@@ -49,7 +49,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         AdjustChargeSpeed = Config.Bind("Stats", "Adjust Charge Speed", true,
             "Whether to change the speed at which Faraday Spur charges");
         ChargeSpeedMult = Config.Bind("Stats", "Charge Speed Multiplier", 1.6f,
-            "The rate at which Faraday Spur should charge");
+            "The rate at which Faraday Spur should charge. Vanilla default is 1");
         AdjustDamage = Config.Bind("Stats", "Adjust Explosion Damage", true,
             "Whether to adjust the explosion damage of Faraday Spur");
         BaseDamage = Config.Bind("Stats", "Base Explosion Damage", 10f,
@@ -68,6 +68,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         StepSliderConfig chargeSpeedMultConfig = new()
         {
             min = 0f, max = 5f, increment = 0.05f, FormatString = "{0:P0}",
+            description = "The rate at which Faraday Spur should charge.\n\nVanilla default is 100%, mod default is 160%",
             checkIfDisabled = () => !AdjustChargeSpeed.Value,
             remapManualInputToStep = false,
             TryParseDelegate = ParsePercentage
