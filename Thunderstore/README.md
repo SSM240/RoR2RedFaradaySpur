@@ -2,7 +2,7 @@
 
 This mod turns Faraday Spur into a legendary (red) item instead of an uncommon (green) item. To compensate, it gets a couple buffs to try to keep it exciting in its new tier:
 
-- charging speed increased by **+100%**
+- charging speed increased by **+60%**
 - shockwave damage increased to **1000% (+700% per stack)**, up from 400% (+280% per stack).
 
 These stat changes can be adjusted or disabled in the config if you wish.

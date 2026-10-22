@@ -48,7 +48,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
 
         AdjustChargeSpeed = Config.Bind("Stats", "Adjust Charge Speed", true,
             "Whether to change the speed at which Faraday Spur charges");
-        ChargeSpeedMult = Config.Bind("Stats", "Charge Speed Multiplier", 2f,
+        ChargeSpeedMult = Config.Bind("Stats", "Charge Speed Multiplier", 1.6f,
             "The rate at which Faraday Spur should charge");
         AdjustDamage = Config.Bind("Stats", "Adjust Explosion Damage", true,
             "Whether to adjust the explosion damage of Faraday Spur");
