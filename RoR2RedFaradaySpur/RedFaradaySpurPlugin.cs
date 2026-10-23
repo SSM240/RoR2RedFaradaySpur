@@ -26,7 +26,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
     public const string PluginGUID = PluginAuthor + "." + PluginName;
     public const string PluginAuthor = "SSM24";
     public const string PluginName = "RedFaradaySpur";
-    public const string PluginVersion = "1.0.0";
+    public const string PluginVersion = "1.0.1";
 
     internal static RedFaradaySpurPlugin Instance;
     internal bool ItemQualitiesLoaded = false;
@@ -94,7 +94,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         };
         ModSettingsManager.AddOption(new StepSliderOption(StackDamage, stackDamageConfig));
 
-        if (GetSpriteFromFile("", "icon.png", out var sprite))
+        if (GetSpriteFromFile("icon.png", out var sprite))
         {
             ModSettingsManager.SetModIcon(sprite);
         }
@@ -143,7 +143,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
     private void On_ItemCatalog_SetItemDefs(On.RoR2.ItemCatalog.orig_SetItemDefs orig, ItemDef[] newItemDefs)
     {
         DLC3Content.Items.JumpDamageStrike._itemTierDef = ItemTierCatalog.GetItemTierDef(ItemTier.Tier3);
-        if (GetSpriteFromFile("icons", "texJumpDamageStrike_new.png", out Sprite sprite))
+        if (GetSpriteFromFile("texJumpDamageStrike_new.png", out Sprite sprite))
         {
             #pragma warning disable CS0618 // Type or member is obsolete
             DLC3Content.Items.JumpDamageStrike.pickupIconSprite = sprite;
@@ -222,13 +222,13 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
 
     // loads a png and creates a sprite object out of it because i am not installing all of unity just for texture replacements
     // if someone wants to make + give me an assetbundle or whatever for these textures hmu
-    internal static bool GetSpriteFromFile(string folder, string filename, out Sprite sprite)
+    internal static bool GetSpriteFromFile(string filename, out Sprite sprite)
     {
         sprite = null;
         // largely taken from https://github.com/Vl4dimyr/CaptainShotgunModes/blob/fdf828e/RiskOfOptionsMod.cs#L36-L48
         try
         {
-            using Stream stream = File.OpenRead(Path.Combine(Path.GetDirectoryName(Instance.Info.Location), folder, filename));
+            using Stream stream = File.OpenRead(Path.Combine(Path.GetDirectoryName(Instance.Info.Location), filename));
             Texture2D texture = new Texture2D(0, 0);
             byte[] imgData = new byte[stream.Length];
 
@@ -243,7 +243,7 @@ public class RedFaradaySpurPlugin : BaseUnityPlugin
         }
         catch (FileNotFoundException)
         {
-            Log.Error($"file {Path.Combine(folder, filename)} not found");
+            Log.Error($"file {Path.Combine(filename)} not found");
             return false;
         }
     }

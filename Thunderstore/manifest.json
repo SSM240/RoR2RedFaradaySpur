@@ -1,6 +1,6 @@
 ﻿{
 	"name": "RedFaradaySpur",
-	"version_number": "1.0.0",
+	"version_number": "1.0.1",
 	"website_url": "https://github.com/SSM240/RoR2RedFaradaySpur",
 	"description": "Turns Faraday Spur into a legendary (red) item, with adjusted stats. Includes LookingGlass and Quality support",
 	"dependencies": [
