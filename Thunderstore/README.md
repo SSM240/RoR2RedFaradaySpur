@@ -27,6 +27,8 @@ The new damage stats will also be reflected in the stats display for [LookingGla
 
 Everyone (server + client) should have this mod in multiplayer, with the same config.
 
+Also shoutouts to [WhiteGuillotine](https://thunderstore.io/c/riskofrain2/p/prodzpod/WhiteGuillotine/) which was a good reference to use for changing item tiers.
+
 As always, if anything is broken, ping me on Discord (`ssm24`) or open an issue on GitHub. Otherwise, enjoy :D
 
 ![blank-space-for-comedic-effect](https://raw.githubusercontent.com/SSM240/RoR2RedFaradaySpur/refs/heads/main/github-imgs/blank-space-for-comedic-effect.png)
